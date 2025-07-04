@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CarForm from '../components/CarForm';
 import ImageUpload from '../components/ImageUpload';
+import Gallery from '../components/Gallery';
 import GlobalStyle from '../styles/GlobalStyles';
 import styled from 'styled-components';
 
@@ -22,6 +23,15 @@ export default function Home() {
   const [images, setImages] = useState([]);
   const [generatedImage, setGeneratedImage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // 🔥 Mock de imagens públicas
+  const publicImages = [
+    'https://via.placeholder.com/300x200?text=IA+1',
+    'https://via.placeholder.com/300x200?text=IA+2',
+    'https://via.placeholder.com/300x200?text=IA+3',
+    'https://via.placeholder.com/300x200?text=IA+4',
+    'https://via.placeholder.com/300x200?text=IA+5',
+  ];
 
   const handleSubmit = async () => {
     if (images.length < 2) {
@@ -58,9 +68,17 @@ export default function Home() {
         <button onClick={handleSubmit} disabled={loading}>
           {loading ? 'Gerando...' : 'Gerar Imagem'}
         </button>
+
         {generatedImage && (
-          <img src={generatedImage} alt="Imagem gerada" style={{ marginTop: 20, width: '100%' }} />
+          <img
+            src={generatedImage}
+            alt="Imagem gerada"
+            style={{ marginTop: 20, width: '100%' }}
+          />
         )}
+
+        {/* 👇 Galeria de imagens da comunidade */}
+        <Gallery images={publicImages} />
       </Container>
     </>
   );
